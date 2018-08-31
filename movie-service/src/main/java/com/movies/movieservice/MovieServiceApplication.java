@@ -20,13 +20,13 @@ public class MovieServiceApplication {
 			Flux<String> flux = Flux.fromArray("1,2,3,4,5".split(","));
 			flux.map(Integer::parseInt)
 					.filter(x -> x % 2 == 0)
-					.subscribe(System.out::println, null, null);
+					.subscribe(System.out::println, null, null); // return values on Subscription
 
 			System.out.println("==========");
 
 			final String[] value = {""};
 			Mono<String> mono = Mono.just("Hello");
-			mono.subscribe(v -> value[0] =v, null, null);
+			mono.subscribe(v -> value[0] =v, null, null); // put values into our final variable on Subscription
 			System.out.println(value[0]);
 		};
 	}
