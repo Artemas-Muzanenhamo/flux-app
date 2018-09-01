@@ -1,11 +1,17 @@
 package com.movies.movieservice;
 
+import com.movies.movieservice.domain.Movie;
+import com.movies.movieservice.repository.MovieRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Random;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class MovieServiceApplication {
@@ -15,19 +21,17 @@ public class MovieServiceApplication {
 	}
 
 	@Bean
-	CommandLineRunner demo() {
+	CommandLineRunner demo(MovieRepository movieRepository) {
 		return args -> {
-			Flux<String> flux = Flux.fromArray("1,2,3,4,5".split(","));
-			flux.map(Integer::parseInt)
-					.filter(x -> x % 2 == 0)
-					.subscribe(System.out::println, null, null); // return values on Subscription
-
-			System.out.println("==========");
-
-			final String[] value = {""};
-			Mono<String> mono = Mono.just("Hello");
-			mono.subscribe(v -> value[0] =v, null, null); // put values into our final variable on Subscription
-			System.out.println(value[0]);
+			Stream.of("Aeon Flux", "Enter the Mono<Void>", "The Fluxinator", "Silence of the Lambdas",
+					"Back to the future", "Y Tu Mono Tambien")
+					.map(name -> new Movie(UUID.randomUUID().toString(), name, randomGenre()))
+					.forEach(movie -> movieRepository.save(movie).subscribe(System.out::println));
 		};
+	}
+
+	private String randomGenre() {
+		String[] genres = "horror, drama, documentary, action, sci-fi".split(",");
+		return genres[new Random().nextInt(genres.length)];
 	}
 }
