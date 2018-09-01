@@ -6,6 +6,8 @@ The idea here is that given a set of Movies, if you wanted to send data(_events_
 of users that are streaming movies every second, you can achieve this through
 Reactive Spring.
 
+---
+
 ## Pre-Requisites
 * Java 8+
 * MongoDB instance running
