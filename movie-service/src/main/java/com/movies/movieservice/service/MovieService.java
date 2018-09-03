@@ -39,11 +39,11 @@ public class MovieService {
         return users[new Random().nextInt(users.length)];
     }
 
-    public Flux<Movie> all(){
+    public Flux<Movie> all() {
         return movieRepository.findAll();
     }
 
-    public Mono<Movie> byId(String id){
+    public Mono<Movie> byId(String id) {
         return movieRepository.findById(id);
     }
 }
