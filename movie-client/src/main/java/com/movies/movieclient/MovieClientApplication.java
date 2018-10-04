@@ -22,6 +22,7 @@ public class MovieClientApplication {
     CommandLineRunner demo(WebClient webClient) {
         return args -> webClient.get()
                 .uri("http://localhost:8082/movies")
+                .accept(MediaType.TEXT_EVENT_STREAM)
                 .exchange()
                 .flatMapMany(clientResponse -> clientResponse.bodyToFlux(Movie.class))
                 .filter(movie -> movie.getTitle().toLowerCase().contains("Aeon Flux".toLowerCase()))
