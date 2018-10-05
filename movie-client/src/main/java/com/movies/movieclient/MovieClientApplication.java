@@ -2,7 +2,6 @@ package com.movies.movieclient;
 
 import com.movies.movieclient.domain.Movie;
 import com.movies.movieclient.domain.MovieEvent;
-import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 public class MovieClientApplication {
-    Logger logger = LoggerFactory.getLogger(MovieClientApplication.class);
+    private Logger logger = LoggerFactory.getLogger(MovieClientApplication.class);
 
     @Bean
     WebClient webClient() {
