@@ -1,0 +1,2 @@
+project('movie-client')
+project('movie-service')
