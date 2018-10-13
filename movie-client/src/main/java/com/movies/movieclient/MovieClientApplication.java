@@ -35,7 +35,8 @@ public class MovieClientApplication {
                                 .exchange()
                                 .flatMapMany(clientResponse -> clientResponse.bodyToFlux(MovieEvent.class))
                                 .subscribe(movieEvent -> {
-                                    logger.info(movieEvent.toString());
+                                    logger.info(movieEvent.getMovie().getId());
+                                    logger.info(movieEvent.getMovie().getTitle());
                                 }));
     }
 
